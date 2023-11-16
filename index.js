@@ -82,7 +82,7 @@ class ElectrumClient extends Client {
   reconnect() {
     console.log('electrum reconnect');
     this.initSocket();
-    return this.initElectrum(this.electrumConfig);
+    return this.initElectrum(this.electrumConfig).catch(function () { console.log("Electrum Connection Rejected"); });
   }
 
   // ElectrumX API
