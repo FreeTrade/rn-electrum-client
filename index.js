@@ -18,7 +18,7 @@ class ElectrumClient extends Client {
   // Override parent
   request(method, params) {
     this.timeLastCall = new Date().getTime();
-    const parentPromise = super.request(method, params);
+    const parentPromise = super.request(method, params).catch(function () { console.log("Request Rejected"); });
     return parentPromise.then(response => {
       this.keepAlive();
       return response;
@@ -27,7 +27,7 @@ class ElectrumClient extends Client {
 
   requestBatch(method, params, secondParam) {
     this.timeLastCall = new Date().getTime();
-    const parentPromise = super.requestBatch(method, params, secondParam);
+    const parentPromise = super.requestBatch(method, params, secondParam).catch(function () { console.log("Request Rejected"); });
     return parentPromise.then(response => {
       this.keepAlive();
       return response;
